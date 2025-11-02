@@ -218,11 +218,37 @@
 
         .drag-hint {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             font-size: 0.9em;
             opacity: 0.7;
             text-transform: uppercase;
             letter-spacing: 0.15em;
+        }
+
+        .series-section {
+            margin-bottom: 50px;
+        }
+
+        .series-header {
+            font-size: 1.5em;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 15px;
+            padding-left: 20px;
+            border-left: 5px solid #2a2a2a;
+            transition: border-color 0.3s ease;
+        }
+
+        body.dark-mode .series-header {
+            border-left-color: #e8e8e8;
+        }
+
+        .series-description {
+            padding-left: 20px;
+            margin-bottom: 20px;
+            opacity: 0.7;
+            font-style: italic;
         }
 
         .gallery-container {
@@ -493,7 +519,6 @@
             }
         }
     </style>
-
     <style>
         .job {
             margin-bottom: 24px;
@@ -505,7 +530,7 @@
         }
 
         .company {
-            color: #64ffda;
+            color: #3b8d79;
             font-weight: 500;
             margin-top: 2px;
         }
@@ -545,11 +570,23 @@
 
         <main>
             <section id="home" class="section active">
-                <div class="content-box">
-                    <h2>About Me</h2>
-                    <p>From research labs to production systems, I design and build distributed protocols. My work
-                        bridges academic rigor with hands-on engineering, shaped by experience across Europe and
-                        Australia in blockchain scalability, distributed systems, and software architecture.</p>
+                <div style="display: flex; gap: 40px; align-items: center; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 250px;">
+                        <h2>About Me</h2>
+                        <p>From research labs to production systems, I design and build distributed protocols. My work
+                            bridges academic rigor with hands-on engineering, shaped by experience across Europe and
+                            Australia in blockchain scalability, distributed systems, and software architecture.</p>
+                        <p>To do</p>
+                    </div>
+                    <div style="flex: 0 0 280px; min-width: 250px;">
+                        <div style="border: 4px solid #2a2a2a; box-shadow: 8px 8px 0 rgba(0,0,0,0.2); transition: border-color 0.3s ease, box-shadow 0.3s ease;"
+                            class="profile-photo-container">
+                            <div
+                                style="aspect-ratio: 3/4; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; font-size: 6em;">
+                                👤
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -712,14 +749,13 @@
                 </div>
             </section>
 
+
             <section id="photography" class="section">
                 <div class="content-box">
                     <h2>Photography Exhibitions</h2>
                     <p class="gallery-intro">A curated collection of visual narratives, each telling its own story.</p>
-                    <p class="drag-hint">← Drag to explore →</p>
-                    <div class="gallery-container" id="galleryContainer">
-                        <div class="gallery-grid" id="galleryGrid"></div>
-                    </div>
+                    <p class="drag-hint">← Drag each row to explore →</p>
+                    <div id="seriesContainer"></div>
                 </div>
             </section>
         </main>
@@ -778,91 +814,159 @@
             });
         });
 
-        // Exhibition data
-        const exhibitions = [
-            { title: "Existential Pigeons", date: "2024", desc: "A deep dive into the philosophical musings of urban pigeons." },
-            { title: "Blurry Cats at Night", date: "2023", desc: "Because focusing is overrated when cats are involved." },
-            { title: "Accidental Selfies", date: "2023", desc: "When you forget the camera is on." },
-            { title: "Things I Found in My Pocket", date: "2022", desc: "An archaeological expedition through lint and receipts." },
-            { title: "Clouds That Look Like Nothing", date: "2022", desc: "Abstract art, courtesy of nature's indifference." },
-            { title: "My Neighbor's Garden", date: "2021", desc: "Totally with permission. Probably." },
-            { title: "Coffee Stains as Art", date: "2021", desc: "Accidental abstract expressionism." },
-            { title: "Shadows of Doubt", date: "2020", desc: "When lighting goes wrong but feels so right." },
-            { title: "Tourist Traps Literally", date: "2020", desc: "Photos of tourists taking photos of things." },
-            { title: "Waiting for the Bus", date: "2019", desc: "A meditation on urban ennui and public transport." },
-            { title: "Empty Parking Lots", date: "2019", desc: "Vast spaces, vaster meanings." },
-            { title: "Food Before Eating", date: "2018", desc: "The essential Instagram prerequisite." },
-            { title: "Reflections of Confusion", date: "2018", desc: "Mirror selfies with existential questions." },
-            { title: "Shoes on Power Lines", date: "2017", desc: "An urban mystery in still frames." },
-            { title: "Graffiti That Says Hi", date: "2017", desc: "When street art gets personal." },
-            { title: "The Neighborhood Dog", date: "2016", desc: "A celebrity in their own right." },
-            { title: "Construction Sites", date: "2016", desc: "Beauty in the unfinished." },
-            { title: "Abandoned Shopping Carts", date: "2015", desc: "Freedom at last." },
-            { title: "Sidewalk Cracks", date: "2015", desc: "The poetry beneath our feet." },
-            { title: "Streetlights in Fog", date: "2014", desc: "Noir vibes on a budget." },
-            { title: "My Ceiling Fan", date: "2014", desc: "365 days of mesmerizing rotation." },
-            { title: "Plastic Bags in Wind", date: "2013", desc: "American Beauty called, they want their motif back." },
-            { title: "Wet Pavement", date: "2013", desc: "When streets become mirrors." },
-            { title: "Fire Hydrants", date: "2012", desc: "Underappreciated urban sculptures." }
+        // Exhibition data organized by series
+        const seriesData = [
+            {
+                name: "Urban Absurdities",
+                description: "Finding humor in the everyday chaos of city life",
+                exhibitions: [
+                    { title: "Existential Pigeons", date: "2024", desc: "A deep dive into the philosophical musings of urban pigeons." },
+                    { title: "Sidewalk Cracks", date: "2015", desc: "The poetry beneath our feet." },
+                    { title: "Abandoned Shopping Carts", date: "2015", desc: "Freedom at last." },
+                    { title: "Shoes on Power Lines", date: "2017", desc: "An urban mystery in still frames." },
+                    { title: "Fire Hydrants", date: "2012", desc: "Underappreciated urban sculptures." }
+                ]
+            },
+            {
+                name: "Accidental Masterpieces",
+                description: "When mistakes become art",
+                exhibitions: [
+                    { title: "Blurry Cats at Night", date: "2023", desc: "Because focusing is overrated when cats are involved." },
+                    { title: "Accidental Selfies", date: "2023", desc: "When you forget the camera is on." },
+                    { title: "Shadows of Doubt", date: "2020", desc: "When lighting goes wrong but feels so right." },
+                    { title: "Reflections of Confusion", date: "2018", desc: "Mirror selfies with existential questions." },
+                    { title: "Coffee Stains as Art", date: "2021", desc: "Accidental abstract expressionism." }
+                ]
+            },
+            {
+                name: "Mundane Observations",
+                description: "Celebrating the overlooked and ordinary",
+                exhibitions: [
+                    { title: "Things I Found in My Pocket", date: "2022", desc: "An archaeological expedition through lint and receipts." },
+                    { title: "My Ceiling Fan", date: "2014", desc: "365 days of mesmerizing rotation." },
+                    { title: "Empty Parking Lots", date: "2019", desc: "Vast spaces, vaster meanings." },
+                    { title: "Waiting for the Bus", date: "2019", desc: "A meditation on urban ennui and public transport." },
+                    { title: "Construction Sites", date: "2016", desc: "Beauty in the unfinished." }
+                ]
+            },
+            {
+                name: "Nature's Indifference",
+                description: "The natural world doing its own thing",
+                exhibitions: [
+                    { title: "Clouds That Look Like Nothing", date: "2022", desc: "Abstract art, courtesy of nature's indifference." },
+                    { title: "My Neighbor's Garden", date: "2021", desc: "Totally with permission. Probably." },
+                    { title: "The Neighborhood Dog", date: "2016", desc: "A celebrity in their own right." },
+                    { title: "Plastic Bags in Wind", date: "2013", desc: "American Beauty called, they want their motif back." }
+                ]
+            },
+            {
+                name: "Social Commentary",
+                description: "Observing human behavior through a lens",
+                exhibitions: [
+                    { title: "Tourist Traps Literally", date: "2020", desc: "Photos of tourists taking photos of things." },
+                    { title: "Food Before Eating", date: "2018", desc: "The essential Instagram prerequisite." },
+                    { title: "Graffiti That Says Hi", date: "2017", desc: "When street art gets personal." }
+                ]
+            },
+            {
+                name: "Atmospheric Moods",
+                description: "Weather and lighting as characters",
+                exhibitions: [
+                    { title: "Streetlights in Fog", date: "2014", desc: "Noir vibes on a budget." },
+                    { title: "Wet Pavement", date: "2013", desc: "When streets become mirrors." }
+                ]
+            }
         ];
 
-        // Generate gallery
-        const galleryGrid = document.getElementById('galleryGrid');
-        exhibitions.forEach((ex, index) => {
-            const card = document.createElement('div');
-            card.className = 'exhibition-card';
-            card.innerHTML = `
-                <div class="exhibition-image">📷</div>
-                <div class="exhibition-info">
-                    <div class="exhibition-title">${ex.title}</div>
-                    <div class="exhibition-date">${ex.date}</div>
-                </div>
-            `;
-            card.addEventListener('click', () => openModal(ex));
-            galleryGrid.appendChild(card);
+        // Generate series and galleries
+        const seriesContainer = document.getElementById('seriesContainer');
+
+        seriesData.forEach((series, seriesIndex) => {
+            // Create series section
+            const seriesSection = document.createElement('div');
+            seriesSection.className = 'series-section';
+
+            const seriesHeader = document.createElement('div');
+            seriesHeader.className = 'series-header';
+            seriesHeader.textContent = series.name;
+
+            const seriesDesc = document.createElement('div');
+            seriesDesc.className = 'series-description';
+            seriesDesc.textContent = series.description;
+
+            const galleryContainer = document.createElement('div');
+            galleryContainer.className = 'gallery-container';
+            galleryContainer.dataset.seriesIndex = seriesIndex;
+
+            const galleryGrid = document.createElement('div');
+            galleryGrid.className = 'gallery-grid';
+
+            // Add exhibition cards
+            series.exhibitions.forEach((ex, index) => {
+                const card = document.createElement('div');
+                card.className = 'exhibition-card';
+                card.innerHTML = `
+                    <div class="exhibition-image">📷</div>
+                    <div class="exhibition-info">
+                        <div class="exhibition-title">${ex.title}</div>
+                        <div class="exhibition-date">${ex.date}</div>
+                    </div>
+                `;
+                card.addEventListener('click', () => openModal(ex));
+                galleryGrid.appendChild(card);
+            });
+
+            galleryContainer.appendChild(galleryGrid);
+            seriesSection.appendChild(seriesHeader);
+            seriesSection.appendChild(seriesDesc);
+            seriesSection.appendChild(galleryContainer);
+            seriesContainer.appendChild(seriesSection);
         });
 
-        // Draggable gallery
-        const container = document.getElementById('galleryContainer');
-        let isDown = false;
-        let startX;
-        let scrollLeft;
+        // Draggable gallery for all containers
+        const containers = document.querySelectorAll('.gallery-container');
 
-        container.addEventListener('mousedown', (e) => {
-            isDown = true;
-            startX = e.pageX - container.offsetLeft;
-            scrollLeft = container.scrollLeft;
-        });
+        containers.forEach(container => {
+            let isDown = false;
+            let startX;
+            let scrollLeft;
 
-        container.addEventListener('mouseleave', () => {
-            isDown = false;
-        });
+            container.addEventListener('mousedown', (e) => {
+                isDown = true;
+                startX = e.pageX - container.offsetLeft;
+                scrollLeft = container.scrollLeft;
+            });
 
-        container.addEventListener('mouseup', () => {
-            isDown = false;
-        });
+            container.addEventListener('mouseleave', () => {
+                isDown = false;
+            });
 
-        container.addEventListener('mousemove', (e) => {
-            if (!isDown) return;
-            e.preventDefault();
-            const x = e.pageX - container.offsetLeft;
-            const walk = (x - startX) * 2;
-            container.scrollLeft = scrollLeft - walk;
-        });
+            container.addEventListener('mouseup', () => {
+                isDown = false;
+            });
 
-        // Touch support
-        let touchStartX = 0;
-        let touchScrollLeft = 0;
+            container.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - container.offsetLeft;
+                const walk = (x - startX) * 2;
+                container.scrollLeft = scrollLeft - walk;
+            });
 
-        container.addEventListener('touchstart', (e) => {
-            touchStartX = e.touches[0].pageX - container.offsetLeft;
-            touchScrollLeft = container.scrollLeft;
-        });
+            // Touch support
+            let touchStartX = 0;
+            let touchScrollLeft = 0;
 
-        container.addEventListener('touchmove', (e) => {
-            const x = e.touches[0].pageX - container.offsetLeft;
-            const walk = (x - touchStartX) * 2;
-            container.scrollLeft = touchScrollLeft - walk;
+            container.addEventListener('touchstart', (e) => {
+                touchStartX = e.touches[0].pageX - container.offsetLeft;
+                touchScrollLeft = container.scrollLeft;
+            });
+
+            container.addEventListener('touchmove', (e) => {
+                const x = e.touches[0].pageX - container.offsetLeft;
+                const walk = (x - touchStartX) * 2;
+                container.scrollLeft = touchScrollLeft - walk;
+            });
         });
 
         // Modal functions
