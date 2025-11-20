@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pouriya Zarbafian</title>
 
-    <script data-goatcounter="https://pouriya.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+    <!-- <script data-goatcounter="https://pouriya.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script> -->
 
     <style>
         * {
@@ -815,6 +815,19 @@
         // Exhibition data organized by series
         const seriesData = [
             {
+                name: "2015",
+                description: "",
+                exhibitions: [
+                    { thumbnail: "photos/2015/boue_thu.JPG", fullImage: "photos/2015/boue_img.JPG" },
+                    { thumbnail: "photos/2015/briques_thu.JPG", fullImage: "photos/2015/briques_img.JPG" },
+                    { thumbnail: "photos/2015/mousse_thu.JPG", fullImage: "photos/2015/mousse_img.JPG" },
+                    { thumbnail: "photos/2015/pierre1_thu.JPG", fullImage: "photos/2015/pierre1_img.JPG" },
+                    { thumbnail: "photos/2015/pierre4_thu.JPG", fullImage: "photos/2015/pierre4_img.JPG" },
+                    { thumbnail: "photos/2015/pierre5_thu.JPG", fullImage: "photos/2015/pierre5_img.JPG" },
+                    { thumbnail: "photos/2015/pierre7_thu.JPG", fullImage: "photos/2015/pierre7_img.JPG" },
+                    { thumbnail: "photos/2015/tolle_thu.JPG", fullImage: "photos/2015/tolle_img.JPG" }
+                ]
+            },            {
                 name: "2013",
                 description: "",
                 exhibitions: [
@@ -828,20 +841,7 @@
                     { thumbnail: "photos/2013/08_thu.jpg", fullImage: "photos/2013/08_img.jpg" }
                 ]
             },
-            {
-                name: "2015",
-                description: "",
-                exhibitions: [
-                    { thumbnail: "photos/2015/boue_thu.JPG", fullImage: "photos/2015/boue_img.JPG" },
-                    { thumbnail: "photos/2015/briques_thu.JPG", fullImage: "photos/2015/briques_img.JPG" },
-                    { thumbnail: "photos/2015/mousse_thu.JPG", fullImage: "photos/2015/mousse_img.JPG" },
-                    { thumbnail: "photos/2015/pierre1_thu.JPG", fullImage: "photos/2015/pierre1_img.JPG" },
-                    { thumbnail: "photos/2015/pierre4_thu.JPG", fullImage: "photos/2015/pierre4_img.JPG" },
-                    { thumbnail: "photos/2015/pierre5_thu.JPG", fullImage: "photos/2015/pierre5_img.JPG" },
-                    { thumbnail: "photos/2015/pierre7_thu.JPG", fullImage: "photos/2015/pierre7_img.JPG" },
-                    { thumbnail: "photos/2015/tolle_thu.JPG", fullImage: "photos/2015/tolle_img.JPG" }
-                ]
-            }
+
         ];
 
         // Generate series and galleries
@@ -869,7 +869,7 @@
                 card.className = 'exhibition-card';
                 card.innerHTML = `
                     <div class="exhibition-image">
-                        <img src="${ex.thumbnail}" alt="Photo ${index + 1}">
+                        <img src="${ex.thumbnail}" alt="Photo ${index + 1}" loading="lazy">
                     </div>
                 `;
                 card.addEventListener('click', () => openModal(ex));
