@@ -212,6 +212,14 @@
             border-bottom-color: #e8e8e8;
         }
 
+        a {
+            color: #2a7d67;
+        }
+
+        body.dark-mode a {
+            color: #6bc5b0;
+        }
+
         /* Photography Gallery */
         .gallery-intro {
             text-align: center;
@@ -739,6 +747,7 @@
                     <h2>Photography</h2>
                     <p class="gallery-intro">A collection of photographs.</p>
                     <div id="seriesContainer"></div>
+                    <p class="gallery-intro">To be continued...</p>
                 </div>
             </section>
         </main>
@@ -798,19 +807,6 @@
         // Exhibition data organized by series
         const seriesData = [
             {
-                name: "2015",
-                description: "",
-                exhibitions: [
-                    { thumbnail: "photos/2015/boue_thu.JPG", fullImage: "photos/2015/boue_img.JPG" },
-                    { thumbnail: "photos/2015/briques_thu.JPG", fullImage: "photos/2015/briques_img.JPG" },
-                    { thumbnail: "photos/2015/mousse_thu.JPG", fullImage: "photos/2015/mousse_img.JPG" },
-                    { thumbnail: "photos/2015/pierre1_thu.JPG", fullImage: "photos/2015/pierre1_img.JPG" },
-                    { thumbnail: "photos/2015/pierre4_thu.JPG", fullImage: "photos/2015/pierre4_img.JPG" },
-                    { thumbnail: "photos/2015/pierre5_thu.JPG", fullImage: "photos/2015/pierre5_img.JPG" },
-                    { thumbnail: "photos/2015/pierre7_thu.JPG", fullImage: "photos/2015/pierre7_img.JPG" },
-                    { thumbnail: "photos/2015/tolle_thu.JPG", fullImage: "photos/2015/tolle_img.JPG" }
-                ]
-            },            {
                 name: "2013",
                 description: "",
                 exhibitions: [
@@ -824,7 +820,20 @@
                     { thumbnail: "photos/2013/08_thu.jpg", fullImage: "photos/2013/08_img.jpg" }
                 ]
             },
-
+            {
+                name: "2015",
+                description: "",
+                exhibitions: [
+                    { thumbnail: "photos/2015/boue_thu.JPG", fullImage: "photos/2015/boue_img.JPG" },
+                    { thumbnail: "photos/2015/briques_thu.JPG", fullImage: "photos/2015/briques_img.JPG" },
+                    { thumbnail: "photos/2015/mousse_thu.JPG", fullImage: "photos/2015/mousse_img.JPG" },
+                    { thumbnail: "photos/2015/pierre1_thu.JPG", fullImage: "photos/2015/pierre1_img.JPG" },
+                    { thumbnail: "photos/2015/pierre4_thu.JPG", fullImage: "photos/2015/pierre4_img.JPG" },
+                    { thumbnail: "photos/2015/pierre5_thu.JPG", fullImage: "photos/2015/pierre5_img.JPG" },
+                    { thumbnail: "photos/2015/pierre7_thu.JPG", fullImage: "photos/2015/pierre7_img.JPG" },
+                    { thumbnail: "photos/2015/tolle_thu.JPG", fullImage: "photos/2015/tolle_img.JPG" }
+                ]
+            },
         ];
 
         // Generate series and galleries
