@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pouriya Zarbafian</title>
+
+    <!-- <script data-goatcounter="https://pouriya.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script> -->
+
     <style>
         * {
             margin: 0;
@@ -209,20 +212,19 @@
             border-bottom-color: #e8e8e8;
         }
 
+        a {
+            color: #2a7d67;
+        }
+
+        body.dark-mode a {
+            color: #6bc5b0;
+        }
+
         /* Photography Gallery */
         .gallery-intro {
             text-align: center;
             margin-bottom: 30px;
             font-style: italic;
-        }
-
-        .drag-hint {
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 0.9em;
-            opacity: 0.7;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
         }
 
         .series-section {
@@ -254,14 +256,8 @@
         .gallery-container {
             overflow-x: auto;
             overflow-y: hidden;
-            cursor: grab;
-            user-select: none;
             padding: 20px 0;
             margin: 0 -20px;
-        }
-
-        .gallery-container:active {
-            cursor: grabbing;
         }
 
         .gallery-container::-webkit-scrollbar {
@@ -298,7 +294,7 @@
 
         .exhibition-card {
             flex: 0 0 280px;
-            height: 380px;
+            height: 280px;
             background: #fff;
             border: 3px solid #2a2a2a;
             box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.2);
@@ -325,33 +321,21 @@
 
         .exhibition-image {
             height: 280px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #f0f0f0;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 4em;
-            border-bottom: 3px solid #2a2a2a;
-            transition: border-color 0.3s ease;
+            overflow: hidden;
         }
 
         body.dark-mode .exhibition-image {
-            border-bottom-color: #e8e8e8;
+            background: #3a3a3a;
         }
 
-        .exhibition-card:nth-child(2n) .exhibition-image {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        }
-
-        .exhibition-card:nth-child(3n) .exhibition-image {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-        }
-
-        .exhibition-card:nth-child(4n) .exhibition-image {
-            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-        }
-
-        .exhibition-card:nth-child(5n) .exhibition-image {
-            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        .exhibition-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .exhibition-info {
@@ -398,18 +382,27 @@
         .modal-content {
             background: #f5f1e8;
             border: 4px solid #2a2a2a;
-            padding: 40px;
-            max-width: 600px;
-            width: 90%;
+            padding: 20px;
+            max-width: 90vw;
+            max-height: 90vh;
+            width: auto;
             box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
             position: relative;
             transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
         }
 
         body.dark-mode .modal-content {
             background: #1a1a1a;
             border-color: #e8e8e8;
             box-shadow: 0 0 50px rgba(255, 255, 255, 0.3);
+        }
+
+        .modal-image {
+            max-width: 100%;
+            max-height: calc(90vh - 80px);
+            object-fit: contain;
         }
 
         .close-modal {
@@ -511,7 +504,7 @@
 
             .exhibition-card {
                 flex: 0 0 240px;
-                height: 340px;
+                height: 240px;
             }
 
             .exhibition-image {
@@ -527,6 +520,11 @@
         .role {
             font-weight: 600;
             font-size: 16px;
+            color: #555;
+        }
+
+        body.dark-mode .role {
+            color: #9aa4b2;
         }
 
         .company {
@@ -538,13 +536,22 @@
         .period,
         .location {
             font-size: 14px;
+            color: #666;
+        }
+
+        body.dark-mode .period,
+        body.dark-mode .location {
             color: #9aa4b2;
         }
 
         .description {
             margin-top: 6px;
             font-size: 14px;
-            color: #c8d2dc;
+            color: #666;
+        }
+
+        body.dark-mode .description {
+            color: #9aa4b2;
         }
     </style>
 </head>
@@ -555,7 +562,7 @@
     <div class="container">
         <header>
             <h2>Pouriya Zarbafian</h2>
-            <p class="subtitle">Protocol Research | Co-Founder | Core Dev</p>
+            <p class="subtitle">Engineer &amp; Researcher</p>
         </header>
 
         <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰ Menu</button>
@@ -573,18 +580,20 @@
                 <div style="display: flex; gap: 40px; align-items: center; flex-wrap: wrap;">
                     <div style="flex: 1; min-width: 250px;">
                         <h2>About Me</h2>
-                        <p>From research labs to production systems, I design and build distributed protocols. My work
-                            bridges academic rigor with hands-on engineering, shaped by experience across Europe and
-                            Australia in blockchain scalability, distributed systems, and software architecture.</p>
-                        <p>To do</p>
+                        <p>
+                        From research labs to production systems, I design and build distributed protocols. My work bridges academic rigor with hands-on engineering, shaped by a PhD in Distributed Systems and experience across Europe and Australia.
+                        </p>
+                        <br/>
+                        <p>
+                        I am working towards the vision of an ubiquitous blockchain, applying rigorous protocol design and high-performance Rust to help bridge the gap between theoretical security and global scale.
+                        </p>
+                        <br/>
+                        <p>Get in touch by email: pouriya (A&nbsp;T) zarbafian (dօt) com</p>
                     </div>
                     <div style="flex: 0 0 280px; min-width: 250px;">
                         <div style="border: 4px solid #2a2a2a; box-shadow: 8px 8px 0 rgba(0,0,0,0.2); transition: border-color 0.3s ease, box-shadow 0.3s ease;"
                             class="profile-photo-container">
-                            <div
-                                style="aspect-ratio: 3/4; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; font-size: 6em;">
-                                👤
-                            </div>
+                            <img src="photos/p.png" alt="Pouriya Zarbafian" style="width: 100%; display: block;">
                         </div>
                     </div>
                 </div>
@@ -651,7 +660,7 @@
             <section id="resume" class="section">
                 <div class="content-box">
                     <div class="resume">
-                        <h2>Publications</h2>
+                        <h2>R&eacute;sum&eacute;</h2>
                         <section>
 
                             <div class="job">
@@ -752,25 +761,23 @@
 
             <section id="photography" class="section">
                 <div class="content-box">
-                    <h2>Photography Exhibitions</h2>
-                    <p class="gallery-intro">A curated collection of visual narratives, each telling its own story.</p>
-                    <p class="drag-hint">← Drag each row to explore →</p>
+                    <h2>Photography</h2>
+                    <p class="gallery-intro">A collection of photographs.</p>
                     <div id="seriesContainer"></div>
+                    <p class="gallery-intro">To be continued...</p>
                 </div>
             </section>
         </main>
 
         <footer>
-            <p>&copy; 2024 Zarbafian. All rights reserved.</p>
+            <p>&copy; 2026 Zarbafian. All rights reserved.</p>
         </footer>
     </div>
 
     <div class="modal" id="exhibitionModal">
         <div class="modal-content">
             <button class="close-modal" onclick="closeModal()">&times;</button>
-            <h2 id="modalTitle"></h2>
-            <p id="modalDate" style="margin-bottom: 20px; opacity: 0.6;"></p>
-            <p id="modalDescription"></p>
+            <img id="modalImage" class="modal-image" src="" alt="">
         </div>
     </div>
 
@@ -817,65 +824,33 @@
         // Exhibition data organized by series
         const seriesData = [
             {
-                name: "Urban Absurdities",
-                description: "Finding humor in the everyday chaos of city life",
+                name: "2013",
+                description: "",
                 exhibitions: [
-                    { title: "Existential Pigeons", date: "2024", desc: "A deep dive into the philosophical musings of urban pigeons." },
-                    { title: "Sidewalk Cracks", date: "2015", desc: "The poetry beneath our feet." },
-                    { title: "Abandoned Shopping Carts", date: "2015", desc: "Freedom at last." },
-                    { title: "Shoes on Power Lines", date: "2017", desc: "An urban mystery in still frames." },
-                    { title: "Fire Hydrants", date: "2012", desc: "Underappreciated urban sculptures." }
+                    { thumbnail: "photos/2013/01_thu.jpg", fullImage: "photos/2013/01_img.jpg" },
+                    { thumbnail: "photos/2013/02_thu.jpg", fullImage: "photos/2013/02_img.jpg" },
+                    { thumbnail: "photos/2013/03_thu.jpg", fullImage: "photos/2013/03_img.jpg" },
+                    { thumbnail: "photos/2013/04_thu.jpg", fullImage: "photos/2013/04_img.jpg" },
+                    { thumbnail: "photos/2013/05_thu.jpg", fullImage: "photos/2013/05_img.jpg" },
+                    { thumbnail: "photos/2013/06_thu.jpg", fullImage: "photos/2013/06_img.jpg" },
+                    { thumbnail: "photos/2013/07_thu.jpg", fullImage: "photos/2013/07_img.jpg" },
+                    { thumbnail: "photos/2013/08_thu.jpg", fullImage: "photos/2013/08_img.jpg" }
                 ]
             },
             {
-                name: "Accidental Masterpieces",
-                description: "When mistakes become art",
+                name: "2015",
+                description: "",
                 exhibitions: [
-                    { title: "Blurry Cats at Night", date: "2023", desc: "Because focusing is overrated when cats are involved." },
-                    { title: "Accidental Selfies", date: "2023", desc: "When you forget the camera is on." },
-                    { title: "Shadows of Doubt", date: "2020", desc: "When lighting goes wrong but feels so right." },
-                    { title: "Reflections of Confusion", date: "2018", desc: "Mirror selfies with existential questions." },
-                    { title: "Coffee Stains as Art", date: "2021", desc: "Accidental abstract expressionism." }
+                    { thumbnail: "photos/2015/boue_thu.JPG", fullImage: "photos/2015/boue_img.JPG" },
+                    { thumbnail: "photos/2015/briques_thu.JPG", fullImage: "photos/2015/briques_img.JPG" },
+                    { thumbnail: "photos/2015/mousse_thu.JPG", fullImage: "photos/2015/mousse_img.JPG" },
+                    { thumbnail: "photos/2015/pierre1_thu.JPG", fullImage: "photos/2015/pierre1_img.JPG" },
+                    { thumbnail: "photos/2015/pierre4_thu.JPG", fullImage: "photos/2015/pierre4_img.JPG" },
+                    { thumbnail: "photos/2015/pierre5_thu.JPG", fullImage: "photos/2015/pierre5_img.JPG" },
+                    { thumbnail: "photos/2015/pierre7_thu.JPG", fullImage: "photos/2015/pierre7_img.JPG" },
+                    { thumbnail: "photos/2015/tolle_thu.JPG", fullImage: "photos/2015/tolle_img.JPG" }
                 ]
             },
-            {
-                name: "Mundane Observations",
-                description: "Celebrating the overlooked and ordinary",
-                exhibitions: [
-                    { title: "Things I Found in My Pocket", date: "2022", desc: "An archaeological expedition through lint and receipts." },
-                    { title: "My Ceiling Fan", date: "2014", desc: "365 days of mesmerizing rotation." },
-                    { title: "Empty Parking Lots", date: "2019", desc: "Vast spaces, vaster meanings." },
-                    { title: "Waiting for the Bus", date: "2019", desc: "A meditation on urban ennui and public transport." },
-                    { title: "Construction Sites", date: "2016", desc: "Beauty in the unfinished." }
-                ]
-            },
-            {
-                name: "Nature's Indifference",
-                description: "The natural world doing its own thing",
-                exhibitions: [
-                    { title: "Clouds That Look Like Nothing", date: "2022", desc: "Abstract art, courtesy of nature's indifference." },
-                    { title: "My Neighbor's Garden", date: "2021", desc: "Totally with permission. Probably." },
-                    { title: "The Neighborhood Dog", date: "2016", desc: "A celebrity in their own right." },
-                    { title: "Plastic Bags in Wind", date: "2013", desc: "American Beauty called, they want their motif back." }
-                ]
-            },
-            {
-                name: "Social Commentary",
-                description: "Observing human behavior through a lens",
-                exhibitions: [
-                    { title: "Tourist Traps Literally", date: "2020", desc: "Photos of tourists taking photos of things." },
-                    { title: "Food Before Eating", date: "2018", desc: "The essential Instagram prerequisite." },
-                    { title: "Graffiti That Says Hi", date: "2017", desc: "When street art gets personal." }
-                ]
-            },
-            {
-                name: "Atmospheric Moods",
-                description: "Weather and lighting as characters",
-                exhibitions: [
-                    { title: "Streetlights in Fog", date: "2014", desc: "Noir vibes on a budget." },
-                    { title: "Wet Pavement", date: "2013", desc: "When streets become mirrors." }
-                ]
-            }
         ];
 
         // Generate series and galleries
@@ -890,10 +865,6 @@
             seriesHeader.className = 'series-header';
             seriesHeader.textContent = series.name;
 
-            const seriesDesc = document.createElement('div');
-            seriesDesc.className = 'series-description';
-            seriesDesc.textContent = series.description;
-
             const galleryContainer = document.createElement('div');
             galleryContainer.className = 'gallery-container';
             galleryContainer.dataset.seriesIndex = seriesIndex;
@@ -906,75 +877,37 @@
                 const card = document.createElement('div');
                 card.className = 'exhibition-card';
                 card.innerHTML = `
-                    <div class="exhibition-image">📷</div>
-                    <div class="exhibition-info">
-                        <div class="exhibition-title">${ex.title}</div>
-                        <div class="exhibition-date">${ex.date}</div>
+                    <div class="exhibition-image">
+                        <img src="${ex.thumbnail}" alt="Photo ${index + 1}" loading="lazy">
                     </div>
                 `;
-                card.addEventListener('click', () => openModal(ex));
+                card.addEventListener('click', () => {
+                    openModal(ex);
+                });
                 galleryGrid.appendChild(card);
             });
 
             galleryContainer.appendChild(galleryGrid);
             seriesSection.appendChild(seriesHeader);
-            seriesSection.appendChild(seriesDesc);
+
+            // Only add description if it exists
+            if (series.description) {
+                const seriesDesc = document.createElement('div');
+                seriesDesc.className = 'series-description';
+                seriesDesc.textContent = series.description;
+                seriesSection.appendChild(seriesDesc);
+            }
+
             seriesSection.appendChild(galleryContainer);
             seriesContainer.appendChild(seriesSection);
-        });
-
-        // Draggable gallery for all containers
-        const containers = document.querySelectorAll('.gallery-container');
-
-        containers.forEach(container => {
-            let isDown = false;
-            let startX;
-            let scrollLeft;
-
-            container.addEventListener('mousedown', (e) => {
-                isDown = true;
-                startX = e.pageX - container.offsetLeft;
-                scrollLeft = container.scrollLeft;
-            });
-
-            container.addEventListener('mouseleave', () => {
-                isDown = false;
-            });
-
-            container.addEventListener('mouseup', () => {
-                isDown = false;
-            });
-
-            container.addEventListener('mousemove', (e) => {
-                if (!isDown) return;
-                e.preventDefault();
-                const x = e.pageX - container.offsetLeft;
-                const walk = (x - startX) * 2;
-                container.scrollLeft = scrollLeft - walk;
-            });
-
-            // Touch support
-            let touchStartX = 0;
-            let touchScrollLeft = 0;
-
-            container.addEventListener('touchstart', (e) => {
-                touchStartX = e.touches[0].pageX - container.offsetLeft;
-                touchScrollLeft = container.scrollLeft;
-            });
-
-            container.addEventListener('touchmove', (e) => {
-                const x = e.touches[0].pageX - container.offsetLeft;
-                const walk = (x - touchStartX) * 2;
-                container.scrollLeft = touchScrollLeft - walk;
-            });
         });
 
         // Modal functions
         function openModal(exhibition) {
             const modal = document.getElementById('exhibitionModal');
-            document.getElementById('modalTitle').textContent = exhibition.title;
-            document.getElementById('modalDate').textContent = exhibition.date;
-            document.getElementById('modalDescription').textContent = exhibition.desc;
+            const modalImage = document.getElementById('modalImage');
+            modalImage.src = exhibition.fullImage;
+            modalImage.alt = 'Full resolution photo';
             modal.classList.add('active');
         }
 
